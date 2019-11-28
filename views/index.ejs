@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+    <head>
+        <title>Hello World</title>
+        <script src="/bower_components/angular/angular.js"></script>
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="/stylesheets/todo.css">
+        <script src="/javascripts/base.js"></script>
+        <script src="/javascripts/todo.js"></script>
+    </head>
+    <body ng-controller="todoController">
+        <div class="container todo-wrapper">
+            <div class="row my-3">
+                <div class="col-12 ">
+                    <h1 class="text-center">
+                        ToDo Project (<span ng-bind="data.remain_todo"></span>)
+                    </h1>
+                </div>
+            </div>
+            <div class="row mt-3 mb-5">
+                <div class="input-group col-12">
+                    <input type="text" class="form-control" placeholder="할일을 입력하세요" aria-label="할일" aria-describedby="button-addon2" ng-model="data.todo">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="button" id="button-addon2" ng-click="fn.submit()">등록</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-3" ng-repeat="item in data.todoList">
+                <div class="card col-12">
+                    <div class="card-body row">
+                        <div class="align-self-center col-9" ng-bind="item.context">
+                        </div>
+                        <div class="col-3 text-right">
+                            <button type='button' class="btn btn-md btn-primary" ng-if="item.is_closed === 0" ng-click="fn.setStatus(item)">
+                                완료
+                            </button>
+                            <button type='button' class="btn btn-md btn-warning" ng-if="item.is_closed === 1" ng-click="fn.setStatus(item)">
+                                복구
+                            </button>
+                            <button type='button' class="btn btn-md btn-danger" ng-click="fn.del(item.id)">
+                                삭제
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
